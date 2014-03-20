@@ -6,9 +6,10 @@
 
         
          ! This is the name of the data file we will read. 
-         character (len = *), parameter :: FILE_NAME = "bathy_meter_sel.nc"
+         character (len = *), parameter :: FILE_NAME = \
+                 "bathy_meter_sel.nc"
 
-        ! We are reading 2D data, a 6 x 12 grid. 
+        ! We are reading 2D data 
         integer :: nx, ny, ndims
         real, allocatable :: data_in(:, :)
         
@@ -41,7 +42,7 @@
         y_dim_id = dim_ids(1)
 
         call check(nf90_inquire_dimension(ncid, y_dim_id, xname, nx))
-        call check(nf90_inquire_dimension(ncid, y_dim_id, yname, ny))
+        call check(nf90_inquire_dimension(ncid, x_dim_id, yname, ny))
 
         print*, xname, ", ", yname
         print*, nx, ", ", ny
