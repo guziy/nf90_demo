@@ -44,7 +44,7 @@
         call check(nf90_inquire_dimension(ncid, y_dim_id, xname, nx))
         call check(nf90_inquire_dimension(ncid, x_dim_id, yname, ny))
 
-        print*, xname, ", ", yname
+        print*, trim(xname), ", ", trim(yname)
         print*, nx, ", ", ny
 
         allocate(data_in(ny, nx))                
