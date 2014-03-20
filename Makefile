@@ -19,10 +19,10 @@ all : $(OBJ)
 	$(FC) $(OBJ) -o $(EXEC_NAME) $(LIBS) 
 
 
-test : $(SOURCES_F) 
+%.o: %.f90  
 	echo $<
 	echo $@
-	$(FC) $(SOURCES_F) -o test.exe $(LIBS)
+	$(FC) -c $< -o $@  
 	#gfortran -fPIC -c -g $< -o $@
 
 
