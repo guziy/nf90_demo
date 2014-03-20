@@ -6,7 +6,7 @@
 
         
          ! This is the name of the data file we will read. 
-         character (len = *), parameter :: FILE_NAME = "bathy_meter.nc"
+         character (len = *), parameter :: FILE_NAME = "bathy_meter_sel.nc"
 
         ! We are reading 2D data, a 6 x 12 grid. 
         integer :: nx, ny, ndims
