@@ -3,11 +3,10 @@
          use netcdf
          implicit none 
                 
-
-        
+	  
          ! This is the name of the data file we will read. 
          character (len = *), parameter :: FILE_NAME = &
-                 "bathy_meter_sel.nc"
+                 "simple_xy.nc"
 
         ! We are reading 2D data 
         integer :: nx, ny, ndims
@@ -24,12 +23,17 @@
         character(len=NF90_MAX_NAME) :: xname, yname        
 
 
+	!Create file
+	call create_file()
+        
+
+
         ! Open the file. NF90_NOWRITE tells netCDF we want read-only access to
         ! the file.
         call check( nf90_open(FILE_NAME, NF90_NOWRITE, ncid) )
 
         ! Get the varid of the data variable, based on its name.
-        call check( nf90_inq_varid(ncid, "Bathymetry", varid) )
+        call check( nf90_inq_varid(ncid, "data", varid) )
 
         !Get var dimensions
         dim_ids = -1
@@ -68,15 +72,18 @@
 
 
 
-         contains
-          subroutine check(status)
+
+end program test
+        
+
+       subroutine check(status)
+		use netcdf
+		implicit none
                 integer, intent ( in) :: status
     
                 if(status /= nf90_noerr) then 
                         print *, trim(nf90_strerror(status))
                         stop "Stopped"
                 end if
-          end subroutine check  
+        end subroutine check  
 
-
-        end program test
