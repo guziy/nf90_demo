@@ -6,13 +6,15 @@ CC = s.cc
 SOURCES_F = $(wildcard *.f90)
 OBJ = $(patsubst %.f90, %.o, $(notdir $(SOURCES_F))) 
 
-INC = $(foreach d, $(EC_INCLUDE_PATH), -I$d) -I$(shell nc-config --includedir)
+INC = $(foreach d, $(EC_INCLUDE_PATH), -I$d) -I$(shell nf-config --includedir) 
 
 EXEC_NAME = test.exe
 
 #rmnlib_folder = $(dir $(shell s.locate --lib rmnshared_013))
 
-LIBS = $(shell nc-config --libs) -lnetcdff 
+LIBS = $(shell nf-config --flibs)
+
+default : test
 
 all : $(OBJ) 
 	@echo $(OBJ)
@@ -22,7 +24,7 @@ all : $(OBJ)
 test : $(SOURCES_F) 
 	echo $<
 	echo $@
-	$(FC) $(SOURCES_F) -o test.exe $(LIBS)
+	$(FC) $(INC) $(SOURCES_F) -o test.exe $(LIBS) 
 	#gfortran -fPIC -c -g $< -o $@
 
 
